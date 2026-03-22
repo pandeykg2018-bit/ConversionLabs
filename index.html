@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ConversionLabs — We Don't Just Market. We Dominate.</title>
+<meta name="description" content="ConversionLabs is a results-driven digital marketing agency helping brands scale with SEO, paid ads, social media, and conversion optimization.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* === RESET & TOKENS === */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#0A0A0F;--bg2:#111118;--bg3:#1a1a24;
+--cyan:#00F5D4;--violet:#7B2FFF;--pink:#FF2DAF;
+--text:#E8E8ED;--text2:#9898A6;--white:#fff;
+--font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
+--radius:12px;--transition:0.3s cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden}
+body{overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+section{padding:100px 0;position:relative}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.1;font-weight:800}
+.section-label{font-size:.85rem;text-transform:uppercase;letter-spacing:3px;color:var(--cyan);margin-bottom:12px;font-weight:600}
+.section-title{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:20px}
+.section-sub{color:var(--text2);max-width:560px;margin:0 auto 48px;font-size:1.05rem}
+.text-center{text-align:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:50px;font-family:var(--font-display);font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:var(--transition);letter-spacing:.5px}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--violet));color:var(--bg);box-shadow:0 0 30px rgba(0,245,212,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(0,245,212,.4)}
+.btn-secondary{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.2)}
+.btn-secondary:hover{border-color:var(--cyan);color:var(--cyan)}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* === NAVBAR === */
+.navbar{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:18px 0;transition:var(--transition)}
+.navbar.scrolled{background:rgba(10,10,15,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05);padding:12px 0}
+.navbar .container{display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--font-display);font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{font-size:.9rem;font-weight:500;transition:var(--transition);position:relative}
+.nav-links a:hover{color:var(--cyan)}
+.nav-cta .btn{padding:10px 24px;font-size:.85rem}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{width:24px;height:2px;background:var(--white);transition:var(--transition);border-radius:2px}
+.mobile-overlay{display:none}
+
+@media(max-width:768px){
+.nav-links{display:none}
+.hamburger{display:flex}
+.mobile-overlay{position:fixed;inset:0;background:rgba(10,10,15,.92);backdrop-filter:blur(30px);z-index:1001;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;pointer-events:none;transition:var(--transition)}
+.mobile-overlay.active{opacity:1;pointer-events:all}
+.mobile-overlay a{font-family:var(--font-display);font-size:1.6rem;font-weight:700;transition:var(--transition)}
+.mobile-overlay a:hover{color:var(--cyan)}
+.mobile-close{position:absolute;top:24px;right:24px;background:none;border:none;color:var(--white);font-size:2rem;cursor:pointer}
+}
+
+/* === HERO === */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding-top:100px}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg canvas{width:100%;height:100%}
+.hero-content{position:relative;z-index:2;max-width:860px}
+.hero h1{font-size:clamp(2.6rem,7vw,5.5rem);margin-bottom:20px;line-height:1;letter-spacing:-1px}
+.hero h1 .gradient{background:linear-gradient(135deg,var(--cyan),var(--violet),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:clamp(1rem,2vw,1.25rem);color:var(--text2);max-width:580px;margin:0 auto 36px}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
+.trust-badges{display:flex;gap:36px;justify-content:center;flex-wrap:wrap}
+.trust-badge{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--text2)}
+.trust-badge .num{font-family:var(--font-display);font-weight:800;font-size:1.1rem;color:var(--white)}
+
+/* === LOGO BAR === */
+.logo-bar{padding:60px 0;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);overflow:hidden}
+.logo-bar h3{text-align:center;font-size:.85rem;text-transform:uppercase;letter-spacing:3px;color:var(--text2);font-weight:500;margin-bottom:32px}
+.logo-track{display:flex;gap:64px;animation:scroll 25s linear infinite;width:max-content}
+.logo-track svg{height:28px;opacity:.35;transition:var(--transition);flex-shrink:0}
+.logo-track svg:hover{opacity:.7}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* === SERVICES === */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+.service-card{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:36px;transition:var(--transition);position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;inset:0;border-radius:var(--radius);padding:1px;background:linear-gradient(135deg,var(--cyan),var(--violet));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:var(--transition)}
+.service-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,245,212,.08)}
+.service-card:hover::before{opacity:1}
+.service-card .icon{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,rgba(0,245,212,.12),rgba(123,47,255,.12));display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:var(--cyan)}
+.service-card h3{font-size:1.2rem;margin-bottom:10px;font-weight:700}
+.service-card p{color:var(--text2);font-size:.95rem;line-height:1.6}
+
+/* === WHY US === */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:32px}
+.why-card{text-align:center;padding:32px 20px}
+.why-card .icon{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--violet));display:flex;align-items:center;justify-content:center;margin:0 auto 20px;color:var(--bg)}
+.why-card h3{font-size:1.15rem;margin-bottom:8px}
+.why-card p{color:var(--text2);font-size:.92rem}
+
+/* === STATS === */
+.stats{background:linear-gradient(135deg,rgba(0,245,212,.06),rgba(123,47,255,.06));border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;text-align:center}
+.stat h2{font-size:clamp(2rem,5vw,3.2rem);background:linear-gradient(135deg,var(--cyan),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px}
+.stat p{color:var(--text2);font-size:.95rem;font-weight:500}
+
+/* === CASE STUDIES === */
+.cases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:28px}
+.case-card{background:var(--bg2);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:var(--transition)}
+.case-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.4)}
+.case-thumb{height:200px;background:linear-gradient(135deg,var(--violet),var(--cyan));position:relative;display:flex;align-items:center;justify-content:center}
+.case-thumb span{font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:rgba(255,255,255,.9)}
+.case-body{padding:28px}
+.case-body .tag{font-size:.78rem;text-transform:uppercase;letter-spacing:2px;color:var(--cyan);margin-bottom:10px;font-weight:600}
+.case-body h3{font-size:1.5rem;margin-bottom:6px}
+.case-body .metric{font-size:1.1rem;color:var(--cyan);font-weight:700;margin-bottom:14px}
+.case-body a{font-size:.9rem;color:var(--text2);font-weight:600;transition:var(--transition)}
+.case-body a:hover{color:var(--cyan)}
+
+/* === TESTIMONIALS === */
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
+.testimonial-card{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:36px;transition:var(--transition)}
+.testimonial-card:hover{border-color:rgba(0,245,212,.2)}
+.stars{color:#FFD700;font-size:1rem;margin-bottom:16px;letter-spacing:2px}
+.testimonial-card blockquote{font-size:1.02rem;line-height:1.7;color:var(--text);margin-bottom:20px;font-style:italic}
+.testimonial-author{display:flex;align-items:center;gap:14px}
+.author-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--violet));display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:.9rem;color:var(--bg)}
+.author-info .name{font-weight:700;font-size:.95rem}
+.author-info .role{font-size:.82rem;color:var(--text2)}
+
+/* === PRICING === */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;align-items:start}
+.price-card{background:var(--bg2);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:40px 32px;position:relative;transition:var(--transition)}
+.price-card.popular{border-color:var(--cyan);box-shadow:0 0 60px rgba(0,245,212,.1);transform:scale(1.03)}
+.popular-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--cyan),var(--violet));color:var(--bg);font-size:.75rem;font-weight:700;padding:5px 18px;border-radius:50px;text-transform:uppercase;letter-spacing:1px}
+.price-card h3{font-size:1.3rem;margin-bottom:8px}
+.price-card .price{font-size:2.8rem;font-family:var(--font-display);font-weight:800;margin-bottom:4px}
+.price-card .period{font-size:.85rem;color:var(--text2);margin-bottom:24px}
+.price-card ul{list-style:none;margin-bottom:32px}
+.price-card li{padding:8px 0;font-size:.93rem;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:10px}
+.price-card li svg{width:16px;height:16px;color:var(--cyan);flex-shrink:0}
+.price-card .btn{width:100%;justify-content:center}
+
+/* === BLOG === */
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
+.blog-card{background:var(--bg2);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:var(--transition)}
+.blog-card:hover{transform:translateY(-4px)}
+.blog-thumb{height:180px;background:linear-gradient(135deg,var(--bg3),var(--bg2));display:flex;align-items:center;justify-content:center;position:relative}
+.blog-thumb .cat{position:absolute;top:14px;left:14px;background:rgba(0,245,212,.15);color:var(--cyan);font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:50px;text-transform:uppercase;letter-spacing:1px}
+.blog-body{padding:24px}
+.blog-body h3{font-size:1.1rem;margin-bottom:8px;font-weight:700;line-height:1.3}
+.blog-body .excerpt{color:var(--text2);font-size:.9rem;margin-bottom:12px;line-height:1.6}
+.blog-meta{display:flex;justify-content:space-between;font-size:.82rem;color:var(--text2)}
+.blog-meta a{color:var(--cyan);font-weight:600}
+
+/* === FAQ === */
+.faq-list{max-width:740px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.06)}
+.faq-q{width:100%;background:none;border:none;color:var(--white);font-family:var(--font-display);font-size:1.05rem;font-weight:700;padding:22px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-align:left}
+.faq-q svg{width:20px;height:20px;transition:var(--transition);color:var(--cyan);flex-shrink:0}
+.faq-item.active .faq-q svg{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;color:var(--text2);font-size:.95rem;line-height:1.7}
+.faq-a p{padding:0 0 22px}
+
+/* === CTA === */
+.cta-section{background:linear-gradient(135deg,rgba(123,47,255,.1),rgba(0,245,212,.08));text-align:center}
+.cta-section h2{font-size:clamp(2rem,5vw,3.4rem);margin-bottom:16px}
+.cta-section>div>.section-sub{margin-bottom:40px}
+.contact-form{max-width:600px;margin:0 auto;display:grid;gap:16px}
+.contact-form input,.contact-form select,.contact-form textarea{width:100%;padding:14px 18px;background:var(--bg);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);color:var(--white);font-family:var(--font-body);font-size:.95rem;transition:var(--transition)}
+.contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 20px rgba(0,245,212,.1)}
+.contact-form textarea{min-height:120px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:500px){.form-row{grid-template-columns:1fr}}
+.contact-alt{margin-top:28px;font-size:.9rem;color:var(--text2)}
+.contact-alt a{color:var(--cyan);font-weight:600}
+
+/* === FOOTER === */
+footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,.05);padding:72px 0 0}
+.footer-grid{display:grid;grid-template-columns:2fr repeat(4,1fr);gap:40px;margin-bottom:48px}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand .logo{font-size:1.4rem;margin-bottom:12px;display:inline-block}
+.footer-brand p{color:var(--text2);font-size:.9rem;max-width:280px;margin-bottom:20px}
+.social-icons{display:flex;gap:12px}
+.social-icons a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:var(--transition);color:var(--text2)}
+.social-icons a:hover{border-color:var(--cyan);color:var(--cyan)}
+footer h4{font-size:.85rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px;color:var(--white)}
+footer ul{list-style:none}
+footer li{margin-bottom:10px}
+footer li a{font-size:.9rem;color:var(--text2);transition:var(--transition)}
+footer li a:hover{color:var(--cyan)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding:20px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.82rem;color:var(--text2)}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+<div class="container">
+<a href="#" class="logo">ConversionLabs</a>
+<ul class="nav-links">
+<li><a href="#services">Services</a></li>
+<li><a href="#work">Work</a></li>
+<li><a href="#pricing">Pricing</a></li>
+<li><a href="#blog">Blog</a></li>
+<li><a href="#contact">Contact</a></li>
+<li class="nav-cta"><a href="#contact" class="btn btn-primary">Get a Free Audit</a></li>
+</ul>
+<button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</div>
+</nav>
+<div class="mobile-overlay" id="mobileMenu">
+<button class="mobile-close" id="mobileClose">&times;</button>
+<a href="#services" onclick="closeMobile()">Services</a>
+<a href="#work" onclick="closeMobile()">Work</a>
+<a href="#pricing" onclick="closeMobile()">Pricing</a>
+<a href="#blog" onclick="closeMobile()">Blog</a>
+<a href="#contact" onclick="closeMobile()">Contact</a>
+<a href="#contact" class="btn btn-primary" onclick="closeMobile()">Get a Free Audit</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+<div class="hero-bg"><canvas id="heroCanvas"></canvas></div>
+<div class="hero-content">
+<h1>We Don't Just Market.<br><span class="gradient">We Dominate.</span></h1>
+<p>Performance-obsessed digital marketing that turns clicks into customers and data into dominance. Scale faster than your competition.</p>
+<div class="hero-btns">
+<a href="#contact" class="btn btn-primary">Start Growing →</a>
+<a href="#work" class="btn btn-secondary">See Our Work</a>
+</div>
+<div class="trust-badges">
+<div class="trust-badge"><span class="num">500+</span> Brands Scaled</div>
+<div class="trust-badge"><span class="num">4.9★</span> on Clutch</div>
+<div class="trust-badge"><span class="num">$200M+</span> Revenue Generated</div>
+</div>
+</div>
+</section>
+
+<!-- LOGO BAR -->
+<section class="logo-bar">
+<h3>Trusted by leading brands</h3>
+<div class="logo-track" id="logoTrack">
+<svg viewBox="0 0 120 30"><text x="10" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">Stripe</text></svg>
+<svg viewBox="0 0 120 30"><text x="10" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">Notion</text></svg>
+<svg viewBox="0 0 120 30"><text x="10" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">Vercel</text></svg>
+<svg viewBox="0 0 120 30"><text x="5" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">Shopify</text></svg>
+<svg viewBox="0 0 120 30"><text x="10" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">Webflow</text></svg>
+<svg viewBox="0 0 140 30"><text x="5" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">HubSpot</text></svg>
+<svg viewBox="0 0 120 30"><text x="10" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">Figma</text></svg>
+<svg viewBox="0 0 120 30"><text x="10" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">Linear</text></svg>
+<!-- duplicate for infinite scroll -->
+<svg viewBox="0 0 120 30"><text x="10" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">Stripe</text></svg>
+<svg viewBox="0 0 120 30"><text x="10" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">Notion</text></svg>
+<svg viewBox="0 0 120 30"><text x="10" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">Vercel</text></svg>
+<svg viewBox="0 0 120 30"><text x="5" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">Shopify</text></svg>
+<svg viewBox="0 0 120 30"><text x="10" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">Webflow</text></svg>
+<svg viewBox="0 0 140 30"><text x="5" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">HubSpot</text></svg>
+<svg viewBox="0 0 120 30"><text x="10" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">Figma</text></svg>
+<svg viewBox="0 0 120 30"><text x="10" y="22" font-family="var(--font-display)" font-size="16" fill="#fff" font-weight="700">Linear</text></svg>
+</div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+<div class="container text-center">
+<p class="section-label reveal">What We Do</p>
+<h2 class="section-title reveal">Everything You Need to Grow</h2>
+<p class="section-sub reveal">End-to-end digital marketing solutions engineered for maximum ROI.</p>
+<div class="services-grid">
+<div class="service-card reveal"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h3>SEO &amp; Content Strategy</h3><p>Dominate search results with data-backed SEO and content that builds authority and drives organic traffic at scale.</p></div>
+<div class="service-card reveal"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/></svg></div><h3>Paid Ads (Google &amp; Meta)</h3><p>High-impact paid campaigns on Google and Meta that maximize ROAS through relentless testing and optimization.</p></div>
+<div class="service-card reveal"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div><h3>Social Media Management</h3><p>Scroll-stopping content and strategic community management that builds engaged audiences and brand loyalty.</p></div>
+<div class="service-card reveal"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><h3>Email Marketing &amp; Automation</h3><p>Revenue-driving email sequences and automations that nurture leads into lifelong customers.</p></div>
+<div class="service-card reveal"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h3>Conversion Rate Optimization</h3><p>Turn more visitors into buyers with A/B testing, UX audits, and landing page optimization that moves the needle.</p></div>
+<div class="service-card reveal"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><h3>Analytics &amp; Reporting</h3><p>Crystal-clear dashboards and actionable insights so you always know exactly what's working and where to double down.</p></div>
+</div>
+</div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+<div class="container text-center">
+<p class="section-label reveal">Why ConversionLabs</p>
+<h2 class="section-title reveal">Built Different. Results Prove It.</h2>
+<div class="why-grid">
+<div class="why-card reveal"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h3>Data-Driven Strategy</h3><p>Every decision backed by real-time analytics and rigorous testing — no guesswork, ever.</p></div>
+<div class="why-card reveal"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Dedicated Account Manager</h3><p>Your own senior strategist — not a rotating roster of juniors. Direct access, always.</p></div>
+<div class="why-card reveal"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>Transparent Reporting</h3><p>Live dashboards and weekly reports — full visibility into spend, performance, and ROI.</p></div>
+<div class="why-card reveal"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h3>No Long-Term Contracts</h3><p>Month-to-month flexibility. We earn your business every single month through results.</p></div>
+</div>
+</div>
+</section>
+
+<!-- STATS -->
+<section class="stats" id="stats">
+<div class="container">
+<div class="stats-grid">
+<div class="stat reveal"><h2><span class="counter" data-target="500">0</span>+</h2><p>Clients Served</p></div>
+<div class="stat reveal"><h2><span class="counter" data-target="97">0</span>%</h2><p>Retention Rate</p></div>
+<div class="stat reveal"><h2><span class="counter" data-target="10">0</span>x</h2><p>Average ROAS</p></div>
+<div class="stat reveal"><h2>$<span class="counter" data-target="200">0</span>M+</h2><p>Revenue Driven</p></div>
+</div>
+</div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="work">
+<div class="container text-center">
+<p class="section-label reveal">Our Work</p>
+<h2 class="section-title reveal">Campaigns That Delivered</h2>
+<p class="section-sub reveal">Real results for real brands. Here's what we've been up to.</p>
+<div class="cases-grid">
+<div class="case-card reveal"><div class="case-thumb" style="background:linear-gradient(135deg,#7B2FFF,#00F5D4)"><span>NovaTech</span></div><div class="case-body"><p class="tag">SEO &amp; Content</p><h3>NovaTech SaaS</h3><p class="metric">+340% Organic Traffic</p><a href="#">Read Case Study →</a></div></div>
+<div class="case-card reveal"><div class="case-thumb" style="background:linear-gradient(135deg,#FF2DAF,#7B2FFF)"><span>Luxe Beauty</span></div><div class="case-body"><p class="tag">Paid Ads</p><h3>Luxe Beauty Co.</h3><p class="metric">12.4x ROAS on Meta</p><a href="#">Read Case Study →</a></div></div>
+<div class="case-card reveal"><div class="case-thumb" style="background:linear-gradient(135deg,#00F5D4,#0066FF)"><span>FitVerse</span></div><div class="case-body"><p class="tag">Full Funnel</p><h3>FitVerse App</h3><p class="metric">+280% App Installs</p><a href="#">Read Case Study →</a></div></div>
+</div>
+</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+<div class="container text-center">
+<p class="section-label reveal">Testimonials</p>
+<h2 class="section-title reveal">What Our Clients Say</h2>
+<p class="section-sub reveal">Don't take our word for it — hear from the brands we've helped scale.</p>
+<div class="testimonials-grid">
+<div class="testimonial-card reveal"><div class="stars">★★★★★</div><blockquote>"ConversionLabs didn't just run our ads — they rebuilt our entire acquisition engine. 6 months in and we've 4x'd our monthly revenue."</blockquote><div class="testimonial-author"><div class="author-avatar">JR</div><div class="author-info"><p class="name">James Rodriguez</p><p class="role">CEO, NovaTech</p></div></div></div>
+<div class="testimonial-card reveal"><div class="stars">★★★★★</div><blockquote>"The most transparent agency we've ever worked with. Weekly reports, real data, zero fluff. They genuinely care about our growth."</blockquote><div class="testimonial-author"><div class="author-avatar">SP</div><div class="author-info"><p class="name">Sarah Park</p><p class="role">CMO, Luxe Beauty Co.</p></div></div></div>
+<div class="testimonial-card reveal"><div class="stars">★★★★★</div><blockquote>"We went from 2,000 to 28,000 organic visitors in under 8 months. Their SEO team is genuinely world-class."</blockquote><div class="testimonial-author"><div class="author-avatar">MK</div><div class="author-info"><p class="name">Michael Kang</p><p class="role">Founder, FitVerse</p></div></div></div>
+</div>
+</div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+<div class="container text-center">
+<p class="section-label reveal">Pricing</p>
+<h2 class="section-title reveal">Simple, Transparent Pricing</h2>
+<p class="section-sub reveal">No hidden fees. No surprise invoices. Just clear value.</p>
+<div class="pricing-grid">
+<div class="price-card reveal"><h3>Starter</h3><p class="price">$2,500</p><p class="period">per month</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>2 Marketing Channels</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Monthly Reporting</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Dedicated Strategist</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Basic SEO Audit</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Email Support</li></ul><a href="#contact" class="btn btn-secondary">Get Started</a></div>
+<div class="price-card popular reveal"><div class="popular-badge">Most Popular</div><h3>Growth</h3><p class="price">$5,000</p><p class="period">per month</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>4 Marketing Channels</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Weekly Reporting + Dashboard</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Senior Account Manager</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Full SEO + Content Strategy</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>CRO &amp; A/B Testing</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Priority Slack Support</li></ul><a href="#contact" class="btn btn-primary">Get Started</a></div>
+<div class="price-card reveal"><h3>Enterprise</h3><p class="price">Custom</p><p class="period">tailored to your needs</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Unlimited Channels</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Real-Time Dashboard</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Dedicated Team of 3+</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Custom Strategy &amp; Consulting</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>24/7 Priority Support</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Quarterly Business Reviews</li></ul><a href="#contact" class="btn btn-secondary">Contact Sales</a></div>
+</div>
+</div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+<div class="container text-center">
+<p class="section-label reveal">Insights</p>
+<h2 class="section-title reveal">Fresh from the Blog</h2>
+<p class="section-sub reveal">Actionable strategies and industry insights from our team.</p>
+<div class="blog-grid">
+<div class="blog-card reveal"><div class="blog-thumb" style="background:linear-gradient(135deg,#1a1a24,#7B2FFF22)"><span class="cat">SEO</span><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="blog-body"><h3>The 2025 SEO Playbook: What Actually Works Now</h3><p class="excerpt">Algorithm updates, AI overviews, and zero-click searches — here's how to win organic traffic in 2025.</p><div class="blog-meta"><span>8 min read</span><a href="#">Read More →</a></div></div></div>
+<div class="blog-card reveal"><div class="blog-thumb" style="background:linear-gradient(135deg,#1a1a24,#00F5D422)"><span class="cat">Paid Media</span><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1"><rect x="2" y="7" width="20" height="14" rx="2"/></svg></div><div class="blog-body"><h3>How We Scaled a D2C Brand to $1M/mo with Meta Ads</h3><p class="excerpt">A deep dive into the creative strategy, audience stacking, and bidding approach behind a 14x ROAS campaign.</p><div class="blog-meta"><span>12 min read</span><a href="#">Read More →</a></div></div></div>
+<div class="blog-card reveal"><div class="blog-thumb" style="background:linear-gradient(135deg,#1a1a24,#FF2DAF22)"><span class="cat">CRO</span><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="blog-body"><h3>5 Landing Page Mistakes Killing Your Conversion Rate</h3><p class="excerpt">We audited 200+ landing pages. These are the most common (and costly) mistakes we found.</p><div class="blog-meta"><span>6 min read</span><a href="#">Read More →</a></div></div></div>
+</div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+<div class="container text-center">
+<p class="section-label reveal">FAQ</p>
+<h2 class="section-title reveal">Got Questions?</h2>
+<p class="section-sub reveal">Everything you need to know before getting started.</p>
+<div class="faq-list">
+<div class="faq-item reveal"><button class="faq-q">How long until we see results?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>Most clients see measurable improvements within 30–60 days for paid channels, and 90–120 days for organic strategies like SEO. We set clear KPIs from day one so you always know where you stand.</p></div></div>
+<div class="faq-item reveal"><button class="faq-q">Do you work with small businesses?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>Absolutely. Our Starter plan is designed specifically for growing businesses. Whether you're doing $50K or $50M in revenue, we tailor our approach to your stage and budget.</p></div></div>
+<div class="faq-item reveal"><button class="faq-q">What makes you different from other agencies?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>Three things: radical transparency (live dashboards, no vanity metrics), senior-level talent on every account, and month-to-month flexibility — we earn your business every month through results, not contracts.</p></div></div>
+<div class="faq-item reveal"><button class="faq-q">Is there a minimum contract length?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>No. All our plans are month-to-month. We recommend a 3-month runway to see meaningful results, but you're never locked in. Cancel anytime with 30-day notice.</p></div></div>
+<div class="faq-item reveal"><button class="faq-q">How do you measure success?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>We focus on business outcomes — revenue, qualified leads, ROAS, and CAC — not vanity metrics. Every campaign has clear KPIs tied to your bottom line, reviewed weekly.</p></div></div>
+<div class="faq-item reveal"><button class="faq-q">What industries do you specialize in?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-a"><p>We've driven results across SaaS, e-commerce, fintech, health &amp; wellness, and professional services. Our frameworks are industry-agnostic but our execution is deeply sector-informed.</p></div></div>
+</div>
+</div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta-section" id="contact">
+<div class="container text-center">
+<p class="section-label reveal">Let's Talk</p>
+<h2 class="section-title reveal">Ready to 10x Your Growth?</h2>
+<p class="section-sub reveal">Book a free strategy call and get a custom growth roadmap — no strings attached.</p>
+<form class="contact-form reveal" onsubmit="event.preventDefault();alert('Thanks! We\'ll be in touch within 24 hours.')">
+<div class="form-row"><input type="text" placeholder="Your Name" required><input type="email" placeholder="Email Address" required></div>
+<div class="form-row"><input type="text" placeholder="Company"><select><option value="" disabled selected>Service Interested In</option><option>SEO &amp; Content</option><option>Paid Ads</option><option>Social Media</option><option>Email Marketing</option><option>CRO</option><option>Analytics</option><option>Full-Service</option></select></div>
+<textarea placeholder="Tell us about your goals..."></textarea>
+<button type="submit" class="btn btn-primary" style="justify-content:center">Send Message →</button>
+</form>
+<p class="contact-alt reveal">Or reach out directly: <a href="mailto:hello@conversionlabs.io">hello@conversionlabs.io</a> · <a href="tel:+18005551234">(800) 555-1234</a></p>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand"><a href="#" class="logo">ConversionLabs</a><p>Performance marketing that turns clicks into customers and data into dominance.</p><div class="social-icons">
+<a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+<a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+<a href="#" aria-label="X"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+<a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+</div></div>
+<div><h4>Services</h4><ul><li><a href="#">SEO &amp; Content</a></li><li><a href="#">Paid Ads</a></li><li><a href="#">Social Media</a></li><li><a href="#">Email Marketing</a></li><li><a href="#">CRO</a></li><li><a href="#">Analytics</a></li></ul></div>
+<div><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Case Studies</a></li><li><a href="#">Partners</a></li></ul></div>
+<div><h4>Resources</h4><ul><li><a href="#">Blog</a></li><li><a href="#">Guides</a></li><li><a href="#">Webinars</a></li><li><a href="#">Newsletter</a></li></ul></div>
+<div><h4>Contact</h4><ul><li><a href="mailto:hello@conversionlabs.io">hello@conversionlabs.io</a></li><li><a href="tel:+18005551234">(800) 555-1234</a></li><li><a href="#">New York, NY</a></li></ul></div>
+</div>
+<div class="footer-bottom"><span>&copy; 2025 ConversionLabs. All rights reserved.</span><span><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></span></div>
+</div>
+</footer>
+
+<script>
+/* === MOBILE MENU === */
+const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu'),mobileClose=document.getElementById('mobileClose');
+hamburger.addEventListener('click',()=>{mobileMenu.classList.add('active');hamburger.style.visibility='hidden'});
+mobileClose.addEventListener('click',closeMobile);
+function closeMobile(){mobileMenu.classList.remove('active');hamburger.style.visibility='visible'}
+
+/* === STICKY NAV === */
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60)});
+
+/* === HERO CANVAS — gradient mesh animation === */
+(function(){
+const c=document.getElementById('heroCanvas'),ctx=c.getContext('2d');
+let w,h;function resize(){w=c.width=window.innerWidth;h=c.height=window.innerHeight}
+resize();window.addEventListener('resize',resize);
+const orbs=[
+{x:.3,y:.3,r:350,dx:.0003,dy:.0002,color:'rgba(0,245,212,.12)'},
+{x:.7,y:.6,r:300,dx:-.0002,dy:.0003,color:'rgba(123,47,255,.12)'},
+{x:.5,y:.8,r:280,dx:.0004,dy:-.0002,color:'rgba(255,45,175,.08)'}
+];
+function draw(){
+ctx.clearRect(0,0,w,h);
+orbs.forEach(o=>{
+o.x+=o.dx;o.y+=o.dy;
+if(o.x<0||o.x>1)o.dx*=-1;
+if(o.y<0||o.y>1)o.dy*=-1;
+const g=ctx.createRadialGradient(o.x*w,o.y*h,0,o.x*w,o.y*h,o.r);
+g.addColorStop(0,o.color);g.addColorStop(1,'transparent');
+ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+});
+requestAnimationFrame(draw);
+}
+draw();
+})();
+
+/* === SCROLL REVEAL === */
+const reveals=document.querySelectorAll('.reveal');
+const revealObs=new IntersectionObserver((entries)=>{
+entries.forEach((e,i)=>{
+if(e.isIntersecting){
+setTimeout(()=>e.target.classList.add('visible'),i*80);
+revealObs.unobserve(e.target);
+}
+});
+},{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+reveals.forEach(el=>revealObs.observe(el));
+
+/* === COUNTER ANIMATION === */
+const counters=document.querySelectorAll('.counter');
+const counterObs=new IntersectionObserver((entries)=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+const el=e.target,target=+el.dataset.target;
+let current=0;const step=target/60;
+const timer=setInterval(()=>{
+current+=step;
+if(current>=target){el.textContent=target;clearInterval(timer)}
+else el.textContent=Math.floor(current);
+},25);
+counterObs.unobserve(el);
+}
+});
+},{threshold:.5});
+counters.forEach(el=>counterObs.observe(el));
+
+/* === FAQ ACCORDION === */
+document.querySelectorAll('.faq-q').forEach(btn=>{
+btn.addEventListener('click',()=>{
+const item=btn.parentElement;
+const wasActive=item.classList.contains('active');
+document.querySelectorAll('.faq-item').forEach(i=>{ i.classList.remove('active');i.querySelector('.faq-a').style.maxHeight=null});
+if(!wasActive){item.classList.add('active');item.querySelector('.faq-a').style.maxHeight=item.querySelector('.faq-a').scrollHeight+'px'}
+});
+});
+
+/* === SMOOTH SCROLL for anchor links === */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+a.addEventListener('click',e=>{
+e.preventDefault();
+const target=document.querySelector(a.getAttribute('href'));
+if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+});
+});
+</script>
+</body>
+</html>
